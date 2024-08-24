@@ -23,6 +23,21 @@ lib-cov
 coverage
 *.lcov
 
+my-app/.idea/
+my-app/node_modules/
+my-app/.expo/
+my-app/dist/
+my-app/npm-debug.*
+my-app/*.jks
+my-app/*.p8
+my-app/*.p12
+my-app/*.key
+my-app/*.mobileprovision
+my-app/*.orig.*
+my-app/web-build/
+my-app/.DS_Store
+my-app/expo-env.d.ts
+
 # nyc test coverage
 .nyc_output
 
