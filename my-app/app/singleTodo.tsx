@@ -1,4 +1,11 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Modal,
+  Button,
+} from "react-native";
 import { useEffect, useState } from "react";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { useRoute } from "@react-navigation/native";
@@ -11,6 +18,7 @@ const singleTodo = () => {
   const [todo, setTodo] = useState<any>();
   const x = route.params?.id;
   const navigation = useNavigation();
+  const [visible, setVisible] = useState(false);
 
   const getData = async () => {
     try {
@@ -54,7 +62,44 @@ const singleTodo = () => {
   return (
     <View style={{ padding: 10 }}>
       <View style={styles.todo}>
-        <Text style={{ fontWeight: 600, fontSize: 20 }}>{todo?.title}</Text>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Text style={{ fontWeight: 600, fontSize: 20 }}>{todo?.title}</Text>
+          <TouchableOpacity
+            onPress={() => {
+              deleteTodo();
+            }}
+          >
+            <AntDesign name="delete" size={16} color="red" />
+          </TouchableOpacity>
+        </View>
+        <Modal visible={visible} animationType="slide" style={{ height: 30 }}>
+          <Text style={{ textAlign: "center", marginTop: 35, fontSize: 17 }}>
+            Would you like to delete todo called '{todo?.title}'?
+          </Text>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              gap: 15,
+              marginTop: 20,
+            }}
+          >
+            <Button
+              title="Close"
+              onPress={toggleModal}
+              color={"green"}
+            ></Button>
+            <Button title="Delete" color={"red"} onPress={deleteTodo}></Button>
+          </View>
+        </Modal>
         <Text style={{ fontWeight: 400, fontSize: 16, marginTop: 4 }}>
           {todo?.description}
         </Text>
@@ -71,13 +116,6 @@ const singleTodo = () => {
             </Text>
           )}
         </Text>
-        <TouchableOpacity
-          onPress={() => {
-            deleteTodo();
-          }}
-        >
-          <AntDesign name="delete" size={16} color="black" />
-        </TouchableOpacity>
       </View>
     </View>
   );
