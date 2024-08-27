@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import "react-native-reanimated";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useColorScheme } from "@/hooks/useColorScheme";
-import singleTodo from "./singleTodo";
+import SingleTodo from "./singleTodo";
 import HomeScreen from "./index";
 import NotFoundScreen from "./+not-found";
 import AddTodo from "./addTodo";
@@ -44,7 +44,7 @@ export default function RootLayout() {
         />
         <Stack.Screen
           name="singleTodo"
-          component={singleTodo}
+          component={SingleTodo}
           options={{ headerShown: false }}
         />
         <Stack.Screen

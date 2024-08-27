@@ -13,7 +13,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useNavigation } from "@react-navigation/native";
 
-const singleTodo = () => {
+const SingleTodo = () => {
   const route = useRoute();
   const [todo, setTodo] = useState<any>();
   const x = route.params?.id;
@@ -35,6 +35,9 @@ const singleTodo = () => {
       console.error("Veri okuma hatası:", e);
     }
   };
+  const toggleModal = () => {
+    setVisible(!visible);
+  };
 
   useEffect(() => {
     getData();
@@ -49,9 +52,7 @@ const singleTodo = () => {
         });
         const jsonValue = JSON.stringify(new_data);
         await AsyncStorage.setItem("todos", jsonValue).then(async () => {
-          const value: any = await AsyncStorage.getItem("todos");
-          // navigation.navigate("index");
-          console.log(JSON.parse(value));
+          navigation.navigate("index");
         });
       }
     } catch (e) {
@@ -73,7 +74,7 @@ const singleTodo = () => {
           <Text style={{ fontWeight: 600, fontSize: 20 }}>{todo?.title}</Text>
           <TouchableOpacity
             onPress={() => {
-              deleteTodo();
+              toggleModal();
             }}
           >
             <AntDesign name="delete" size={16} color="red" />
@@ -137,4 +138,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default singleTodo;
+export default SingleTodo;

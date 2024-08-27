@@ -25,17 +25,17 @@ export default function HomeScreen() {
 
   const scrollToBottom = () => {
     scrollViewRef.current?.scrollToEnd({ animated: true });
-    console.log("la in");
   };
 
   useEffect(() => {
     getData("todos");
+    console.log("messi");
   }, []);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("focus", () => {
       getData("todos");
-      scrollToBottom();
+      console.log("ababababa");
     });
 
     return unsubscribe;
