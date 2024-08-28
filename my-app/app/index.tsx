@@ -33,12 +33,8 @@ export default function HomeScreen() {
   }, []);
 
   useEffect(() => {
-    const unsubscribe = navigation.addListener("focus", () => {
-      getData("todos");
-      console.log("ababababa");
-    });
-
-    return unsubscribe;
+    getData("todos");
+    console.log("messi ronaldo");
   }, [navigation]);
 
   return (

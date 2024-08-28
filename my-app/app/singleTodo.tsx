@@ -52,8 +52,26 @@ const SingleTodo = () => {
         });
         const jsonValue = JSON.stringify(new_data);
         await AsyncStorage.setItem("todos", jsonValue).then(async () => {
-          navigation.navigate("index");
+          navigation.goBack();
         });
+      }
+    } catch (e) {
+      console.error("Veri okuma hatası:", e);
+    }
+  };
+  const toggleTodo = async (id: any) => {
+    try {
+      const value = await AsyncStorage.getItem("todos");
+      if (value !== null) {
+        const parsedValue: any[] = JSON.parse(value); // Stringi tekrar diziye çeviriyoruz
+        let x = parsedValue.filter((todo) => {
+          return todo.id == id;
+        });
+        let todo: any = x[0];
+        todo.finished = !todo.finished;
+        setTodo(todo);
+        const jsonValue = JSON.stringify(parsedValue);
+        await AsyncStorage.setItem("todos", jsonValue);
       }
     } catch (e) {
       console.error("Veri okuma hatası:", e);
@@ -104,7 +122,12 @@ const SingleTodo = () => {
         <Text style={{ fontWeight: 400, fontSize: 16, marginTop: 4 }}>
           {todo?.description}
         </Text>
-        <Text style={{ fontWeight: 400, fontSize: 16, marginTop: 4 }}>
+        <Text
+          style={{ fontWeight: 400, fontSize: 16, marginTop: 4 }}
+          onPress={() => {
+            toggleTodo(todo.id);
+          }}
+        >
           {todo?.finished.toString() == "true" ? (
             <Text style={{ display: "flex", alignItems: "center" }}>
               Finished{"  "}

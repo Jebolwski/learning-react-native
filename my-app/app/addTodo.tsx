@@ -3,14 +3,14 @@ import { TextInput, View, Text, StyleSheet, Button } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { router } from "expo-router";
+import { router, useNavigation } from "expo-router";
 
 export default function AddTodo() {
   const [titleLength, setTitleLength] = useState(0);
   const [descLength, setDescLength] = useState(0);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
-
+  const navigation = useNavigation();
   const addTodo = async (key: string, newItem: any) => {
     try {
       // Öncelikle mevcut veriyi al
@@ -34,7 +34,7 @@ export default function AddTodo() {
       setTitle("");
       setDescLength(0);
       setTitleLength(0);
-      router.replace("/");
+      navigation.navigate("index");
     } catch (e) {
       console.error("Veri ekleme hatası:", e);
     }
