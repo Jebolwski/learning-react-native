@@ -130,12 +130,12 @@ const SingleTodo = () => {
         >
           {todo?.finished.toString() == "true" ? (
             <Text style={{ display: "flex", alignItems: "center" }}>
-              Finished{"  "}
+              Finished{" "}
               <FontAwesome5 name="flag-checkered" size={16} color="green" />
             </Text>
           ) : (
             <Text style={{ display: "flex", alignItems: "center" }}>
-              Not Finished{"  "}
+              Not Finished{" "}
               <FontAwesome5 name="flag-checkered" size={16} color="red" />
             </Text>
           )}
