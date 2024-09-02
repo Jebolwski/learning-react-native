@@ -4,6 +4,7 @@ import {
   Text,
   TouchableOpacity,
   Modal,
+  SafeAreaView,
   Button,
 } from "react-native";
 import { useEffect, useState } from "react";
@@ -79,69 +80,77 @@ const SingleTodo = () => {
   };
 
   return (
-    <View style={{ padding: 10 }}>
-      <View style={styles.todo}>
-        <View
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Text style={{ fontWeight: 600, fontSize: 20 }}>{todo?.title}</Text>
-          <TouchableOpacity
-            onPress={() => {
-              toggleModal();
-            }}
-          >
-            <AntDesign name="delete" size={16} color="red" />
-          </TouchableOpacity>
-        </View>
-        <Modal visible={visible} animationType="slide" style={{ height: 30 }}>
-          <Text style={{ textAlign: "center", marginTop: 35, fontSize: 17 }}>
-            Would you like to delete todo called '{todo?.title}'?
-          </Text>
+    <SafeAreaView
+      style={{ flex: 1, paddingTop: 20, paddingLeft: 6, paddingRight: 6 }}
+    >
+      <View style={{ padding: 10 }}>
+        <View style={styles.todo}>
           <View
             style={{
               display: "flex",
               flexDirection: "row",
-              justifyContent: "center",
-              gap: 15,
-              marginTop: 20,
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
-            <Button
-              title="Close"
-              onPress={toggleModal}
-              color={"green"}
-            ></Button>
-            <Button title="Delete" color={"red"} onPress={deleteTodo}></Button>
+            <Text style={{ fontWeight: 600, fontSize: 20 }}>{todo?.title}</Text>
+            <TouchableOpacity
+              onPress={() => {
+                toggleModal();
+              }}
+            >
+              <AntDesign name="delete" size={16} color="red" />
+            </TouchableOpacity>
           </View>
-        </Modal>
-        <Text style={{ fontWeight: 400, fontSize: 16, marginTop: 4 }}>
-          {todo?.description}
-        </Text>
-        <Text
-          style={{ fontWeight: 400, fontSize: 16, marginTop: 4 }}
-          onPress={() => {
-            toggleTodo(todo.id);
-          }}
-        >
-          {todo?.finished.toString() == "true" ? (
-            <Text style={{ display: "flex", alignItems: "center" }}>
-              Finished{" "}
-              <FontAwesome5 name="flag-checkered" size={16} color="green" />
+          <Modal visible={visible} animationType="slide" style={{ height: 30 }}>
+            <Text style={{ textAlign: "center", marginTop: 35, fontSize: 17 }}>
+              Would you like to delete todo called '{todo?.title}'?
             </Text>
-          ) : (
-            <Text style={{ display: "flex", alignItems: "center" }}>
-              Not Finished{" "}
-              <FontAwesome5 name="flag-checkered" size={16} color="red" />
-            </Text>
-          )}
-        </Text>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                gap: 15,
+                marginTop: 20,
+              }}
+            >
+              <Button
+                title="Close"
+                onPress={toggleModal}
+                color={"green"}
+              ></Button>
+              <Button
+                title="Delete"
+                color={"red"}
+                onPress={deleteTodo}
+              ></Button>
+            </View>
+          </Modal>
+          <Text style={{ fontWeight: 400, fontSize: 16, marginTop: 4 }}>
+            {todo?.description}
+          </Text>
+          <Text
+            style={{ fontWeight: 400, fontSize: 16, marginTop: 4 }}
+            onPress={() => {
+              toggleTodo(todo.id);
+            }}
+          >
+            {todo?.finished?.toString() == "true" ? (
+              <Text style={{ display: "flex", alignItems: "center" }}>
+                Finished{" "}
+                <FontAwesome5 name="flag-checkered" size={16} color="green" />
+              </Text>
+            ) : (
+              <Text style={{ display: "flex", alignItems: "center" }}>
+                Not Finished{" "}
+                <FontAwesome5 name="flag-checkered" size={16} color="red" />
+              </Text>
+            )}
+          </Text>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

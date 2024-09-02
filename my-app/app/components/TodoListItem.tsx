@@ -1,14 +1,21 @@
-import { StyleSheet, View, Text, Button, Modal } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Button,
+  Modal,
+  TouchableHighlight,
+} from "react-native";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import AntDesign from "@expo/vector-icons/AntDesign";
+
 const TodoListItem = (props: any) => {
   const [todo, setTodo] = useState<any>([]);
   const [visible, setVisible] = useState(false);
-
   const navigation = useNavigation();
 
   const toggleTodo = async (id: any) => {
@@ -19,16 +26,38 @@ const TodoListItem = (props: any) => {
         let x = parsedValue.filter((todo) => {
           return todo.id == id;
         });
+
         let todo: any = x[0];
         todo.finished = !todo.finished;
+        console.log(
+          todo.title,
+          "basıldı",
+          !todo.finished,
+          "idi ama artık",
+          todo.finished
+        );
+
         setTodo(todo);
+
+        let notFinishedArr = parsedValue.filter((todo) => {
+          return todo.finished == false;
+        });
+        let finishedArr = parsedValue.filter((todo) => {
+          return todo.finished == true;
+        });
+
         const jsonValue = JSON.stringify(parsedValue);
-        await AsyncStorage.setItem("todos", jsonValue);
+
+        await AsyncStorage.setItem("todos", jsonValue).then(() => {
+          props.func();
+        });
+        console.log("veriler değiştirildi....");
       }
     } catch (e) {
       console.error("Veri okuma hatası:", e);
     }
   };
+
   const toggleModal = () => {
     setVisible(!visible);
   };
@@ -53,10 +82,7 @@ const TodoListItem = (props: any) => {
   };
 
   return (
-    <TouchableOpacity
-      onPress={() => navigation.navigate("singleTodo", { id: props.todo.id })}
-      style={styles.todo}
-    >
+    <View style={styles.todo}>
       <View
         style={{
           display: "flex",
@@ -65,7 +91,13 @@ const TodoListItem = (props: any) => {
           justifyContent: "space-between",
         }}
       >
-        <Text>{props.todo?.title}</Text>
+        <Text
+          onPress={() =>
+            navigation.navigate("singleTodo", { id: props.todo.id })
+          }
+        >
+          {props.todo?.title}
+        </Text>
         <View
           style={{
             display: "flex",
@@ -75,24 +107,30 @@ const TodoListItem = (props: any) => {
             justifyContent: "space-evenly",
           }}
         >
-          <TouchableOpacity
+          <TouchableHighlight
             onPress={() => {
               toggleModal();
             }}
           >
             <AntDesign name="delete" size={16} color="black" />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {
-              toggleTodo(props.todo.id);
-            }}
-          >
-            {todo.finished ? (
+          </TouchableHighlight>
+          {todo.finished ? (
+            <TouchableHighlight
+              onPress={() => {
+                toggleTodo(props.todo.id);
+              }}
+            >
               <FontAwesome5 name="flag-checkered" size={16} color="green" />
-            ) : (
+            </TouchableHighlight>
+          ) : (
+            <TouchableHighlight
+              onPress={() => {
+                toggleTodo(props.todo.id);
+              }}
+            >
               <FontAwesome5 name="flag-checkered" size={16} color="gray" />
-            )}
-          </TouchableOpacity>
+            </TouchableHighlight>
+          )}
         </View>
       </View>
       <Modal visible={visible} animationType="slide" style={{ height: 30 }}>
@@ -112,8 +150,12 @@ const TodoListItem = (props: any) => {
           <Button title="Delete" color={"red"} onPress={deleteTodo}></Button>
         </View>
       </Modal>
-      <Text>{props.todo?.description}</Text>
-    </TouchableOpacity>
+      <Text
+        onPress={() => navigation.navigate("singleTodo", { id: props.todo.id })}
+      >
+        {props.todo?.description}
+      </Text>
+    </View>
   );
 };
 
