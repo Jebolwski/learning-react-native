@@ -39,13 +39,6 @@ const TodoListItem = (props: any) => {
 
         setTodo(todo);
 
-        let notFinishedArr = parsedValue.filter((todo) => {
-          return todo.finished == false;
-        });
-        let finishedArr = parsedValue.filter((todo) => {
-          return todo.finished == true;
-        });
-
         const jsonValue = JSON.stringify(parsedValue);
 
         await AsyncStorage.setItem("todos", jsonValue).then(() => {
@@ -114,7 +107,7 @@ const TodoListItem = (props: any) => {
           >
             <AntDesign name="delete" size={16} color="black" />
           </TouchableHighlight>
-          {todo.finished ? (
+          {todo?.finished ? (
             <TouchableHighlight
               onPress={() => {
                 toggleTodo(props.todo.id);

@@ -35,12 +35,12 @@ export default function HomeScreen() {
         notFinishedArr = parsedValue.filter((todo) => {
           return todo.finished == false;
         });
-        console.log("bitmeyenler", notFinishedArr, notFinishedArr.length);
 
         finishedArr = parsedValue.filter((todo) => {
           return todo.finished == true;
         });
         console.log("bitenler", finishedArr, finishedArr.length);
+        console.log("bitmeyenler", notFinishedArr, notFinishedArr.length);
         console.log("====================");
 
         setTodosF(finishedArr);
