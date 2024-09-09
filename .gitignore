@@ -7,6 +7,8 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+.idea/
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -71,6 +73,8 @@ web_modules/
 
 # Yarn Integrity file
 .yarn-integrity
+
+my-nativewind-app/node_modules/
 
 # dotenv environment variable files
 .env
