@@ -1,12 +1,17 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
-import axios from 'axios';
 import useFetch from '@/app/fetch';
 import { ScrollView } from 'react-native-gesture-handler';
 import { CategoriesData } from '../interface/data';
+import SingleCategory from '@/app/components/SingleCategory';
+
 export default function Categories() {
 
     const {data, loading, error} = useFetch("https://www.themealdb.com/api/json/v1/1/categories.php");
+    
     const responseData : CategoriesData = data;
+
+    console.log(responseData);
+    
     if(loading){
         return <Text>Loading...</Text>
     }
@@ -16,16 +21,20 @@ export default function Categories() {
     }
 
     return (
-        <View>
-            <Text>{loading}</Text>
-            <Text>msaessi</Text>
+        <View style={styles.structure}>
             <ScrollView>
-                {responseData?.categories.forEach((category:any) => {
-                    <View>
-                        <Text>{category?.strCategory}</Text>
-                    </View>
-                })}
+            {responseData?.categories.map((category:any,index:number) => {
+                return (
+                    <SingleCategory category={category} key={index} />
+                );
+            })}
             </ScrollView>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    structure:{
+        backgroundColor:"orange"
+    },
+  });

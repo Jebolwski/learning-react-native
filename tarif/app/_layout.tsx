@@ -7,6 +7,8 @@ import 'react-native-reanimated';
 import { createStackNavigator } from "@react-navigation/stack";
 import { useColorScheme } from '@/hooks/useColorScheme';
 import Categories from './views/categories/Categories';
+import HomeScreen from './index';
+import Meals from './views/meals/Meals';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -35,7 +37,18 @@ export default function RootLayout() {
         <Stack.Screen
           name="views/categories/Categories"
           component={Categories}
-          options={{ headerShown: false }}
+          options={{ headerShown: true }}
+          
+        />
+        <Stack.Screen
+          name="views/meals/Meals"
+          component={Meals}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ headerShown: true }}
         />
       </Stack.Navigator>
     </ThemeProvider>
