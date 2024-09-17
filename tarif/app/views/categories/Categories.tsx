@@ -25,7 +25,7 @@ export default function Categories() {
             <ScrollView>
             {responseData?.categories.map((category:any,index:number) => {
                 return (
-                    <SingleCategory category={category} key={index} />
+                    <SingleCategory category={category} key={index}  />
                 );
             })}
             </ScrollView>

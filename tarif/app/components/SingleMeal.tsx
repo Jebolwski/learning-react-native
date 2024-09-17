@@ -1,15 +1,14 @@
 import { Text, View,StyleSheet, Image, Touchable, TouchableHighlight } from 'react-native';
 import { useNavigation } from "@react-navigation/native";
 
-export default function SingleCategory(props:any) {
+export default function SingleMeal(props:any) {
 
     const navigation = useNavigation();
         
     return (
-        <TouchableHighlight  onPress={()=>navigation.navigate("views/meals/Meals", { category: props.category.strCategory })}>
+        <TouchableHighlight>
             <View style={styles.structure}>
-                <Image source={props.category.strCategoryThumb} style={styles.image} width={100} height={100} />
-                <Text style={styles.text}>{props.category.strCategory}</Text>
+                <Text style={styles.text}>{props.meal.strMeal}</Text>
             </View>
         </TouchableHighlight>
     );
