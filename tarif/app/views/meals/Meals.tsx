@@ -28,18 +28,8 @@ const styles = StyleSheet.create({
       borderRadius:35
     },
     structure:{
-        display:"flex",
-        flexDirection:"row",
-        gap:16,
-        alignItems:"center",
-        borderWidth:1,
-        borderColor:"gray",
         padding:5,
         margin:5,
-        borderRadius:5,
-        borderTopLeftRadius:30,
-        borderBottomLeftRadius:30,
-        backgroundColor:"white"
     },
     text:{
         fontSize:22

@@ -5,9 +5,12 @@ export default function SingleMeal(props:any) {
 
     const navigation = useNavigation();
         
+    
+
     return (
-        <TouchableHighlight>
+        <TouchableHighlight onPress={()=>navigation.navigate("views/meal-detail/MealDetail", { idMeal: props.meal.idMeal })}>
             <View style={styles.structure}>
+                <Image source={props.meal.strMealThumb}  style={{width:"100%",height:180}} /> 
                 <Text style={styles.text}>{props.meal.strMeal}</Text>
             </View>
         </TouchableHighlight>
@@ -21,20 +24,13 @@ const styles = StyleSheet.create({
       borderRadius:35
     },
     structure:{
-        display:"flex",
-        flexDirection:"row",
-        gap:16,
-        alignItems:"center",
-        borderWidth:1,
         borderColor:"gray",
-        padding:5,
-        margin:5,
+        borderWidth:1,
         borderRadius:5,
-        borderTopLeftRadius:30,
-        borderBottomLeftRadius:30,
-        backgroundColor:"white"
+        marginTop:10
     },
     text:{
-        fontSize:22
+        fontSize:22,
+        padding:5
     }
   });

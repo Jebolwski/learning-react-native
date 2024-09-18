@@ -9,6 +9,7 @@ import { useColorScheme } from '@/hooks/useColorScheme';
 import Categories from './views/categories/Categories';
 import HomeScreen from './index';
 import Meals from './views/meals/Meals';
+import MealDetail from './views/meal-detail/MealDetail';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -48,6 +49,11 @@ export default function RootLayout() {
         <Stack.Screen
           name="HomeScreen"
           component={HomeScreen}
+          options={{ headerShown: true }}
+        />
+        <Stack.Screen
+          name="views/meal-detail/MealDetail"
+          component={MealDetail}
           options={{ headerShown: true }}
         />
       </Stack.Navigator>
