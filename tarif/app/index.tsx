@@ -4,7 +4,6 @@ import { Image, StyleSheet, Platform, View } from 'react-native';
 export default function HomeScreen() {
   return (
       <View style={styles.titleContainer}>
-       
       </View>
   );
 }

@@ -10,6 +10,7 @@ import Categories from './views/categories/Categories';
 import HomeScreen from './index';
 import Meals from './views/meals/Meals';
 import MealDetail from './views/meal-detail/MealDetail';
+import { DataProvider } from './context/DataContext';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -34,29 +35,31 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="views/categories/Categories"
-          component={Categories}
-          options={{ headerShown: true }}
-          
-        />
-        <Stack.Screen
-          name="views/meals/Meals"
-          component={Meals}
-          options={{ headerShown: true }}
-        />
-        <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{ headerShown: true }}
-        />
-        <Stack.Screen
-          name="views/meal-detail/MealDetail"
-          component={MealDetail}
-          options={{ headerShown: true }}
-        />
-      </Stack.Navigator>
+      <DataProvider>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="views/categories/Categories"
+            component={Categories}
+            options={{ headerShown: true }}
+
+          />
+          <Stack.Screen
+            name="views/meals/Meals"
+            component={Meals}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="views/meal-detail/MealDetail"
+            component={MealDetail}
+            options={{ headerShown: true }}
+          />
+        </Stack.Navigator>
+      </DataProvider>
     </ThemeProvider>
   );
 }
